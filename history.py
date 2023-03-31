@@ -24,8 +24,8 @@ logger = logging.getLogger().getChild(__name__)
 
 
 class SignalHistory:
-    MAX_SECONDS_DEFAULT = 24 * 3600  # 1 day
-    DELTA_SECONDS_DEFAULT = 60  # every minute
+    MAX_SECONDS_DEFAULT = 60  # 1 minute
+    DELTA_SECONDS_DEFAULT = 1  # every 1 second
     MAX_SECONDS_CSV_FILES = 24 * 3600 * 32  # 32 days
 
     sources: List[SignalSource]

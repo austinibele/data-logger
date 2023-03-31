@@ -17,17 +17,17 @@ import time
 class GraphsCanvas(Graph):
 
     def __init__(self, **kwargs):
-        self.allowed_min_y = -15
-        self.allowed_max_y = 60
+        self.allowed_min_y = -60
+        self.allowed_max_y = 200
         # note: ticks_minor means the number of subdivisions 
-        super().__init__(x_ticks_minor=6,
-                         x_ticks_major=3600,
-                         xlabel='Zeit',
-                         y_ticks_major=5,
-                         y_ticks_minor=5,
-                         ylabel='Temperaturen °C',
+        super().__init__(x_ticks_minor=2,
+                         x_ticks_major=10,
+                         xlabel='Time',
+                         y_ticks_major=20,
+                         y_ticks_minor=4,
+                         ylabel='Temperature °C',
                          xmin=0,
-                         xmax=3600,
+                         xmax=60,
                          ymin=self.allowed_min_y,
                          ymax=self.allowed_max_y)
 
@@ -123,7 +123,7 @@ class GraphsScreen(GestureDetector):
         for source_plot in sorted(zip(self.history.sources, self.plots), key=lambda sp: sp[0].z_order):
             self.ids.graphs_canvas.add_plot(source_plot[1])
 
-        self.history.write_to_csv('csv/signals')
+        self.history.write_to_csv('../logs/csv/signals')
         self.history.load_from_csv_files()
         self.history.start()
 
@@ -166,11 +166,6 @@ class GraphsScreen(GestureDetector):
 
     def on_pinch(self, pinch_continue, orig_center, center, orig_size, size):
         graph = self.ids.graphs_canvas
-        # if not pinch_continue:
-        #    print()
-        #    print()
-        #    print()
-        # print(str(pinch_continue) + " oc=" + str(orig_center) + " os=" + str(orig_size) + " c=" + str(center) + " s=" + str(size))
         if pinch_continue:
             new_center_y = (self.begin_min_y + self.begin_max_y) / 2.
             new_center_y -= (
@@ -181,7 +176,6 @@ class GraphsScreen(GestureDetector):
             if orig_size[1] > 50:
                 new_delta_y = new_delta_y * (orig_size[1] / max(1, size[1]))
                 new_delta_y = (max(5, new_delta_y) // 5 + 1) * 5
-            # print('new center=' + str(new_center_y) + ' delta=' + str(new_delta_y))
             new_min_y = new_center_y - new_delta_y / 2.
             new_min_y = (new_min_y + 2.5) // 5 * 5
             new_min_y = min(graph.allowed_max_y - new_delta_y, new_min_y)
@@ -193,4 +187,3 @@ class GraphsScreen(GestureDetector):
         else:
             self.begin_min_y = graph.ymin
             self.begin_max_y = graph.ymax
-            # print('begin_min=' + str(self.begin_min_y) + ' _max=' + str(self.begin_max_y))
