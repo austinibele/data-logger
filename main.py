@@ -36,6 +36,7 @@ class DataLoggerWidget(BoxLayout):
     status_text = StringProperty()
     time_text = StringProperty()
     date_text = StringProperty()
+    _running = False
 
     SCREENSAVER_DELAY = 600
 
@@ -50,6 +51,11 @@ class DataLoggerWidget(BoxLayout):
 
     def start(self):
         self.ids.graphs_screen.start()
+        self._running = True
+        
+    def stop(self):
+        self.ids.graphs_screen.history.stop()
+        self._running = False
 
     def update_clock(self, *args):
         now = time.time()

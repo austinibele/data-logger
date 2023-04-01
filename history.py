@@ -79,7 +79,7 @@ class SignalHistory:
             self._timer = None
             self._close_csv_file()
             logger.info('Stopped recording history')
-
+            
     def get_values(self, signal_source):
         with self._data_lock:
             return self._values_by_source_id[id(signal_source)]
