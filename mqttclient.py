@@ -34,7 +34,6 @@ class MqttClient:
         self.broker_ca_certs = None
         self.broker_base_topic = 'datalogger'
         self.client = mqtt.Client()
-        # self.client.enable_logger(logger)
         self.client.on_connect = self._on_connect
         self.client.on_disconnect = self._on_disconnect
         self.client.on_message = self._on_message

@@ -42,12 +42,14 @@ class DataLoggerWidget(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.clock_update_event = Clock.schedule_interval(self.update_clock, 1.)
-        self.ids.measurements_screen.use_signals_config(signal_sources_config)
-        self.ids.graphs_screen.use_signals_config(signal_sources_config)
-
         self._last_user_activity = time.time()
         self._screensaver_active = None
         self._activate_screensaver(False)
+        self.ids.measurements_screen.use_signals_config(signal_sources_config)
+        self.ids.graphs_screen.use_signals_config(signal_sources_config)
+
+    def start(self):
+        self.ids.graphs_screen.start()
 
     def update_clock(self, *args):
         now = time.time()

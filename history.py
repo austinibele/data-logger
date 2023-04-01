@@ -65,15 +65,13 @@ class SignalHistory:
             self.sources.remove(signal_source)
             self._values_by_source_id.pop(id(signal_source))
 
-    def get_ready(self):
+    def start(self):
         if self._timer is None:
             logger.info('Starting to record history every ' +
                         str(self.delta_seconds) + 's for ' + str(self.max_seconds) + 's')
             self._begin_new_csv_file()
-            
-    def start(self):
         self._timer = RepeatTimer(self.delta_seconds, self.record)
-        self._timer.start()
+        self._timer.start()    
 
     def stop(self):
         if self._timer is not None:

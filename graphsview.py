@@ -125,7 +125,7 @@ class GraphsScreen(GestureDetector):
 
         self.history.write_to_csv('../logs/csv/signals')
         self.history.load_from_csv_files()
-        self.history.get_ready()
+        self.history.start()
 
         self.x_range = self.history.max_seconds
         self.x_max = None
