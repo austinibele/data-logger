@@ -47,20 +47,20 @@
             canvas:
                 Rectangle:
                     source: 'images/record.png'
-                    pos: self.x + (self.width + 400) / 2, self.y + (self.height - 32) / 2
-                    size: 70, 35
+                    pos: self.x + (self.width - 35) / 2, self.y + (self.height - 35) / 2
+                    size: 35, 35
             background_color:  [0.6, 0.6, 1, 1] if screen_manager.index == 1 else [0.5, 0.5, 1, 0]
             width:  self.height
             size_hint_x: None
             on_press:
-                screen_manager.index = 1
+                print("SUCCESS")
         
         Button:
             canvas:
                 Rectangle:
                     source: 'images/stop.png'
-                    pos: self.x + (self.width + 500) / 2, self.y + (self.height - 35) / 2
-                    size: 70, 35
+                    pos: self.x + (self.width - 35) / 2, self.y + (self.height - 33) / 2
+                    size: 35, 35
             background_color:  [0.6, 0.6, 1, 1] if screen_manager.index == 1 else [0.5, 0.5, 1, 0]
             width:  self.height
             size_hint_x: None
@@ -239,6 +239,6 @@
                     on_release:
                         root.ok_action()
                 Button:
-                    text: 'Abbrechen'
+                    text: 'Cancel'
                     on_release:
                         root.cancel_action()
