@@ -49,11 +49,12 @@
                     source: 'images/record.png'
                     pos: self.x + (self.width - 35) / 2, self.y + (self.height - 35) / 2
                     size: 35, 35
-            background_color:  [0.6, 0.6, 1, 1] if root._running else [0.5, 0.5, 1, 0]
+            background_color:  [0.5, 0.5, 1, 0]
             width:  self.height
             size_hint_x: None
             on_press:
                 root.start()
+                root.update_label('Recording')
         
         Button:
             canvas:
@@ -61,12 +62,17 @@
                     source: 'images/stop.png'
                     pos: self.x + (self.width - 35) / 2, self.y + (self.height - 33) / 2
                     size: 35, 35
-            background_color:  [0.6, 0.6, 1, 1] if not root._running else [0.5, 0.5, 1, 0]
+            background_color:  [0.5, 0.5, 1, 0]
             width:  self.height
             size_hint_x: None
             on_press:
                 root.stop()
-             
+                root.update_label('Not Recording')
+
+        Label:
+            id: is_recording
+            text: 'Not Recording'
+
             
         # status text:
         Label:

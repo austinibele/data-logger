@@ -57,6 +57,11 @@ class DataLoggerWidget(BoxLayout):
         self.ids.graphs_screen.history.stop()
         self._running = False
 
+
+    def update_label(self,txt):
+       self.ids.is_recording.text = txt
+
+
     def update_clock(self, *args):
         now = time.time()
         dt = datetime.fromtimestamp(now)
