@@ -16,6 +16,7 @@ import os
 import re
 from threading import RLock
 import time
+from datetime import datetime
 
 from signalsources import SignalSource
 from utils import RepeatTimer
@@ -88,7 +89,7 @@ class SignalHistory:
         row = []
         with self._data_lock:
             now = time.time()
-            row.append(round(now, 3))
+            row.append(datetime.fromtimestamp(now).strftime('%d-%m-%Y %H:%M:%S'))
             self.__clean_old_history(now)
             for source in self.sources:
                 value = source.last_value
