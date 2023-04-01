@@ -4,7 +4,6 @@
 
 #:import MeasurementsGroup measurementsview 
 #:import GraphsScreen graphsview  
-#:import ServiceScreen serviceview  
 
 <DataLoggerWidget>:
     padding:  [6, 6, 6, 6]
@@ -47,14 +46,27 @@
         Button:
             canvas:
                 Rectangle:
-                    source: 'images/service.png'
-                    pos: self.x + (self.width - 35) / 2, self.y + (self.height - 35) / 2
-                    size: 35, 35
-            background_color:  [0.6, 0.6, 1, 1] if screen_manager.index == 2 else [0.5, 0.5, 1, 0]
+                    source: 'images/record.png'
+                    pos: self.x + (self.width + 400) / 2, self.y + (self.height - 32) / 2
+                    size: 70, 35
+            background_color:  [0.6, 0.6, 1, 1] if screen_manager.index == 1 else [0.5, 0.5, 1, 0]
             width:  self.height
             size_hint_x: None
             on_press:
-                screen_manager.index = 2
+                screen_manager.index = 1
+        
+        Button:
+            canvas:
+                Rectangle:
+                    source: 'images/stop.png'
+                    pos: self.x + (self.width + 500) / 2, self.y + (self.height - 35) / 2
+                    size: 70, 35
+            background_color:  [0.6, 0.6, 1, 1] if screen_manager.index == 1 else [0.5, 0.5, 1, 0]
+            width:  self.height
+            size_hint_x: None
+            on_press:
+                screen_manager.index = 1
+             
             
         # status text:
         Label:
@@ -94,9 +106,6 @@
             name: 'measurements'
         GraphsScreen:
             id: graphs_screen
-            name: 'graphs'
-        ServiceScreen:
-            id: service_screen
             name: 'graphs'
 
 
@@ -211,28 +220,6 @@
             x_grid: True
             y_grid_label: True
             y_grid: True
-
-<ServiceScreen>:
-    BoxLayout:
-        orientation:  'vertical'
-        width: 300
-        size_hint_x:  None
-        height: 200
-        size_hint_y:  None
-        Button:
-            text: 'Neustart'
-            on_release:
-                root.reboot_action()
-        
-        Button:
-            text: 'Herunterfahren'
-            on_release:
-                root.shutdown_action()
-
-        Button:
-            text: 'Aktualisieren'
-            on_release:
-                root.update_action()
 
 <OkCancelPopup>:
     message: 'missing text'
